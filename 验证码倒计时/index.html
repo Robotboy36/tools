@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    
+    <style>
+    	input,    
+    	button{
+    		font-size: 14px;
+    		padding: 7px 15px;
+    		border: 1px solid #eee;
+    		outline: none;
+    	}
+    	
+    	button{
+    		background: #0585E8;
+    		color: #fff;    
+    		text-align: center;		
+    	}
+    	
+    	button.disabled{
+    		background: #999;
+    		color: #666;
+    	}
+    </style>
+</head>
+<body>
+    
+    <input type="text" id="tel" placeholder="请输入手机号码" />
+
+
+    <button get-code
+        data-time="10" 
+        data-ajaxurl="code.txt"
+        data-call="callback"
+        data-timetxt="s后重新获取">获取验证码</button>
+        
+    <button get-code
+        data-ajaxurl="code.txt"
+        data-time="10">获取短信</button>
+
+    <script src="timedown.js"></script>
+    <script>
+    	
+    	function callback( data ){
+    		alert( data );
+    	}
+    	
+    	
+    </script>
+    
+</body>
+</html>

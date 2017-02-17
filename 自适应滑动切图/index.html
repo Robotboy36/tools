@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>纵向滑动</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="css/slide.css"/>
+	</head>
+	<body>
+		
+		
+		<div class="slidelist slidelist-h">
+			<div shade class="shade top-shade"></div>
+			<div shade class="shade bottom-shade"></div>
+			<ul>
+				<li>
+					<img src="images/bird1.png"/>
+				</li>
+				<li>
+					<img src="images/bird2.png"/>
+				</li>
+				<li>
+					<img src="images/bird3.png"/>
+				</li>
+				<li>
+					<img src="images/bird4.png"/>
+				</li>
+				<li>
+					<img src="images/bird5.png"/>
+				</li>
+				<li>
+					<img src="images/bird6.png"/>
+				</li>
+				<li>
+					<img src="images/bird7.png"/>
+				</li>
+				<li>
+					<img src="images/bird8.png"/>
+				</li>
+				<li>
+					<img src="images/bird9.png"/>
+				</li>
+				<li>
+					<img src="images/bird10.png"/>
+				</li>
+			</ul>			
+		</div>
+		
+		
+		<div class="slidelist slidelist-v">
+			<div shade class="shade top-shade"></div>
+			<div shade class="shade bottom-shade"></div>
+			<ul>
+				<li>
+					<img src="images/bird1.png"/>
+				</li>
+				<li>
+					<img src="images/bird2.png"/>
+				</li>
+				<li>
+					<img src="images/bird3.png"/>
+				</li>
+				<li>
+					<img src="images/bird4.png"/>
+				</li>
+				<li>
+					<img src="images/bird5.png"/>
+				</li>
+				<li>
+					<img src="images/bird6.png"/>
+				</li>
+				<li>
+					<img src="images/bird7.png"/>
+				</li>
+				<li>
+					<img src="images/bird8.png"/>
+				</li>
+				<li>
+					<img src="images/bird9.png"/>
+				</li>
+				<li>
+					<img src="images/bird10.png"/>
+				</li>
+			</ul>			
+		</div>
+		
+		<script type="text/javascript" src="js/jq.js" ></script>
+		<script type="text/javascript" src="js/slide.js" ></script>
+
+		<script>
+			$(function(){
+				var hSlide = new Jslide({
+					container: ".slidelist-h",
+					loop: true,
+					direction: 0
+				});
+				
+				
+				var vSlide = new Jslide({
+					container: ".slidelist-v",
+					loop: false,
+					direction: 1
+				});
+			});
+		</script>
+	</body>
+</html>

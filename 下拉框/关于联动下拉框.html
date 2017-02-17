@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style>
+			select{
+				height: 40px;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<select name="province" id="province_sel" data-target="#city_sel"></select>
+		<select name="city" id="city_sel" data-target="#area_sel"></select>
+		<select name="area" id="area_sel"></select>
+		
+		
+		<script>
+			var cityData = [
+				{
+					name: "湖南省",
+					childs:[
+						{
+							name: "长沙市",
+							childs:[								
+								{name:"岳麓区"},
+								{name:"芙蓉区"},
+								{name:"雨花区"}
+							]
+						},
+						{
+							name: "郴州市",
+							childs:[								
+								{name:"苏仙区"},
+								{name:"北湖区"}
+							]
+						}
+					]
+				},
+				{
+					name: "广东省",
+					childs:[
+						{
+							name: "深圳市",
+							childs:[								
+								{name:"南山区"},
+								{name:"福田区"},
+								{name:"保安区"}
+							]
+						},
+						{
+							name: "广州市",
+							childs:[								
+								{name:"白云区"},
+								{name:"天河区"},
+								{name:"黄埔区"}
+							]
+						}
+					]
+				}
+			];
+			
+			
+			var selectEles = document.querySelectorAll('select');
+			var provinceSelEl = document.querySelector('#province_sel');
+			var citySelEl = document.querySelector('#city_sel');
+			var areaSelEl = document.querySelector('#area_sel');
+			
+			
+			fillData( provinceSelEl, cityData )
+			fillData( citySelEl )
+			fillData( areaSelEl )
+			initEvent();
+			
+			
+			// 数据填充
+			function fillData( ele, data ){				
+				data = data || [];
+				
+				var html = '<option value="0">== 请选择 ==</option>';
+				for( var i=0, len=data.length; i<len; i++ ){
+					html += '<option value="'+ data[i].name +'">'+ data[i].name +'</option>'
+				}
+				
+				ele.innerHTML = html;
+			}
+			
+			
+			function filterData( name, arrData ){			
+				var result = '';
+				
+				for( var i=0,len=arrData.length; i<len; i++ ){
+					var item = arrData[i];
+					
+					if( item.name == name ){
+						return item;
+					}
+					
+					if( item.childs && item.childs.length > 0 ){
+						result = filterData( name, item.childs );
+					}
+					
+					if( result ){
+						return result;
+					}
+				}
+				
+				return result; 
+			}
+			
+			
+			function initEvent(){				
+				selectEles.forEach(function(ele){
+					ele.addEventListener('change', function(e){
+						e = e || window.event;
+						var el = e.target || e.srcElement;
+						onSelected( el );
+					}, false);
+				});				
+			}
+			
+			
+			function onSelected( ele ){				
+				var selectVal = ele.value;				
+				
+				// 下级目标
+				var targetSelector = ele.getAttribute('data-target');
+				var targetEle = targetSelector && document.querySelector(targetSelector);
+				
+				initSelect( targetEle );
+//				
+				if( selectVal === '0' ){
+					return false;
+				}
+				
+				var item = filterData( selectVal, cityData );	
+				if( item && item.childs ){
+					fillData( targetEle, item.childs );
+				}
+			}
+			
+			
+			function initSelect( ele ){
+				if( !ele ){
+					return false;
+				}		
+				
+				fillData( ele, [] );
+				
+				if( ele.getAttribute('data-target') ){		
+					var targetSelector = ele.getAttribute('data-target');
+					var targetEle = targetSelector && document.querySelector(targetSelector);	
+					
+					initSelect( targetEle );
+				}
+			}
+			
+		</script>
+	</body>
+</html>
